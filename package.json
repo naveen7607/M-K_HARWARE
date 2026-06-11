@@ -1,0 +1,29 @@
+{
+  "name": "manikyam-agriculture-hardware-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack local business commerce and operations platform for M/S Manikyam Agriculture Hardware, Electrical & Cement.",
+  "workspaces": [
+    "apps/web",
+    "apps/api"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace apps/api\" \"npm run dev --workspace apps/web\"",
+    "dev:web": "npm run dev --workspace apps/web",
+    "dev:api": "npm run dev --workspace apps/api",
+    "build": "npm run build --workspace apps/api && npm run build --workspace apps/web",
+    "lint": "npm run lint --workspace apps/web && npm run lint --workspace apps/api",
+    "typecheck": "npm run typecheck --workspace apps/api && npm run typecheck --workspace apps/web"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "^8.5.15"
+    }
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}
