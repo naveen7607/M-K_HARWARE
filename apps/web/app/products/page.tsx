@@ -1,15 +1,7 @@
 import { Suspense } from "react";
 import { ProductsCatalog } from "@/components/products/products-catalog";
 
-export default async function ProductsPage({
-  searchParams
-}: {
-  searchParams?: Promise<{
-    category?: string;
-  }>;
-}) {
-  const resolvedSearchParams = await searchParams;
-
+export default function ProductsPage() {
   return (
     <main className="bg-slate-50">
       <section className="border-b border-slate-200 bg-white py-12">
@@ -26,7 +18,7 @@ export default async function ProductsPage({
       <section className="band">
         <div className="container-page">
           <Suspense fallback={null}>
-            <ProductsCatalog initialCategory={resolvedSearchParams?.category} />
+            <ProductsCatalog />
           </Suspense>
         </div>
       </section>

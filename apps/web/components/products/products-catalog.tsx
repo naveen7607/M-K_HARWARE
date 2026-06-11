@@ -7,14 +7,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { apiFetch } from "@/lib/api";
+import { useSearchParams } from "next/navigation";
 import { categories, products as fallbackProducts, type CategoryName, type Product } from "@/lib/sample-data";
 
 const pageSize = 6;
 
-export function ProductsCatalog({ initialCategory }: { initialCategory?: string }) {
+export function ProductsCatalog() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
   const [products, setProducts] = useState<Product[]>(fallbackProducts);
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<string>(initialCategory ?? "All");
+  const [category, setCategory] = useState<string>("All");
+
+  useEffect(() => {
+    setCategory(categoryParam ?? "All");
+  }, [categoryParam]);
   const [sort, setSort] = useState("latest");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
