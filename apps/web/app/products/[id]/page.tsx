@@ -7,6 +7,12 @@ import { Card } from "@/components/ui/card";
 import { products } from "@/lib/sample-data";
 import { formatCurrency } from "@/lib/utils";
 
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    id: product._id
+  }));
+}
+
 export default async function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = products.find((item) => item._id === id) ?? products[0];
